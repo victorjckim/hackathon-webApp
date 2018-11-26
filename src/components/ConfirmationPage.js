@@ -39,6 +39,24 @@ class Confirmation extends React.Component {
     }
   }
 
+  onClick = () => {
+    const showAlert = () => (
+      <SweetAlert
+        info
+        showCancel
+        cancelBtnText="No"
+        confirmBtnText="Yes"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="primary"
+        title="Confirm Transaction?"
+        onConfirm={() => this.pushToOldPage()}
+        onCancel={() => this.setState({ alert: null })}
+      >
+      </SweetAlert>
+    );
+    this.setState({ alert: showAlert() })
+  }
+
   goBack = () => {
     const showAlert = () => (
       <SweetAlert
@@ -86,6 +104,14 @@ class Confirmation extends React.Component {
                           <p> Total: ${this.state.total}</p>
                           <img alt="Visa Checkout" className="v-button" role="button" src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png" />
                         </div>
+                        <button
+                              style={{ minWidth: "30vw", maxWidth: "100vw" }}
+                              type="button"
+                              className="btn btn-primary btn-block mt-4"
+                              onClick={this.onClick}
+                            >
+                              Confirm
+                        </button>
                         <button
                           style={{ minWidth: "30vw", maxWidth: "100vw" }}
                           type="button"

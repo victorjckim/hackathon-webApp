@@ -51,8 +51,7 @@ class Register extends Component {
                               lastName={this.state.lastName}
                               vin={this.state.vin}
                               email={this.state.email}
-                              password={this.state.cvc}
-                              password={this.state.cvc}
+                              password={this.state.password}
                               onChange={this.onChange}
                               onClick={this.onRegisterClick}
                             />
