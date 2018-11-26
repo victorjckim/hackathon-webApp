@@ -8,7 +8,7 @@ class Extend extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      meterNum: "",
+      meterNum: "MM406",
       time: "",
       total: "",
       alert: null,
@@ -99,7 +99,7 @@ class Extend extends Component {
                             <img src="" alt="" />
                           </div>
                           <h3 className="text-center text-muted font-weight-normal mb-4">
-                            Extend Meter
+                            Extend
                               </h3>
                           <form className="me">
                             <ExtendForm
@@ -132,7 +132,7 @@ class Extend extends Component {
                             <button
                               style={{ minWidth: "30vw", maxWidth: "100vw" }}
                               type="button"
-                              className="btn btn-danger btn-sm"
+                              className="btn btn-default btn-sm"
                               onClick={this.goBack}>
                               Cancel
                               </button>
