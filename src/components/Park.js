@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ParkForm from "./ParkForm"
-import swal from 'sweetalert'
+import SweetAlert from 'react-bootstrap-sweetalert';
 const moment = require("moment");
 moment().format();
 
@@ -11,20 +11,10 @@ class Park extends Component {
       meterNum: "",
       time: "",
       total: "",
+      alert: null,
+      confirmAlert: null,
+      exceptionAlert: null,
     }
-  }
-
-  componentDidMount() {
-    window.V.init({
-      apikey: "88XIS66LQV6WBYA417KW21-PekffcTrxMQFYlqkMumzwHOiio",
-      paymentRequest: {
-        currencyCode: "USD",
-        subtotal: "11.00"
-      }
-    });
-    window.V.on("payment.success", function (payment) { alert(JSON.stringify(payment)); });
-    window.V.on("payment.cancel", function (payment) { alert(JSON.stringify(payment)); });
-    window.V.on("payment.error", function (payment, error) { alert(JSON.stringify(error)); });
   }
 
   onChange = evt => {
@@ -44,14 +34,58 @@ class Park extends Component {
 
   onMoneyChange = test => {
     let totalAm = test / 30
-    this.setState({ total: totalAm })
+    this.setState({ total: totalAm + ".00" })
   }
 
-  onClick = () => console.log(this.state)
+  onClick = () => {
+    const showAlert = () => (
+      <SweetAlert
+        info
+        confirmBtnText="Cool Thanks!"
+        confirmBtnBsStyle="success"
+        title=""
+        onConfirm={() => this.pushToNewPage()}
+      >
+        <p>Meter Id: {this.state.meterNum}</p>
+        <p>Expiration: {this.state.time}</p>
+        <p>Total: ${this.state.total}</p>
+      </SweetAlert>
+    );
+    this.setState({ alert: showAlert() })
+  }
+
+  goBack = () => {
+    const showAlert = () => (
+      <SweetAlert
+        info
+        showCancel
+        cancelBtnText="No"
+        confirmBtnText="Yes"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="primary"
+        title="Cancel Transaction?"
+        onConfirm={() => this.pushToOldPage()}
+        onCancel={() => this.setState({ alert: null })}
+      >
+      </SweetAlert>
+    );
+    this.setState({ alert: showAlert() })
+  }
+
+  hideAlert() {
+    this.setState({ alert: null, confirmAlert: null, exceptionAlert: null });
+  }
+
+  pushToNewPage = () => this.props.history.push({ pathname: "/ConfirmPage", data: this.state })
+
+  pushToOldPage = () => this.props.history.push("/Landing")
 
   render() {
     return (
       <React.Fragment>
+        {this.state.confirmAlert}
+        {this.state.alert}
+        {this.state.exceptionAlert}
         <div className="background">
           <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
             <div className="authentication-wrapper authentication-2 ui-bg-cover ui-bg-overlay-container container-fluid px-4">
@@ -71,7 +105,6 @@ class Park extends Component {
                             <ParkForm
                               meterNum={this.state.meterNum}
                               onChange={this.onChange}
-
                             />
                             <div className="form-group">
                               <label className="form-label">Time Length</label>
@@ -88,7 +121,6 @@ class Park extends Component {
                                 <option value="240">240 Mins</option>
                               </select>
                             </div>
-                            <img alt="Visa Checkout" className="v-button" role="button" src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png" />
                             <button
                               style={{ minWidth: "30vw", maxWidth: "100vw" }}
                               type="button"
@@ -97,6 +129,13 @@ class Park extends Component {
                             >
                               Start Parking
                         </button>
+                            <button
+                              style={{ minWidth: "30vw", maxWidth: "100vw" }}
+                              type="button"
+                              className="btn btn-danger btn-sm"
+                              onClick={this.goBack}>
+                              Cancel
+                              </button>
                           </form>
                           <div className="card-footer px-4 px-md-3 px-xs-3 px-sm-5" />
                         </div>

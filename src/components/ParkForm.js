@@ -5,7 +5,7 @@ const ParkForm = props => {
   return (
     <div className="authentication-inner">
       <TextInput
-        label="Meter Number"
+        label="Meter Id"
         name="meterNum"
         type="meterNum"
         value={props.meterNum}
