@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ExtendForm from "../components/ExtendForm"
+import SweetAlert from 'react-bootstrap-sweetalert';
+const moment = require("moment");
+moment().format();
 
 class Extend extends Component {
   constructor(props) {
@@ -7,23 +10,82 @@ class Extend extends Component {
     this.state = {
       meterNum: "G611592",
       time: "",
-      total: ""
+      total: "",
+      alert: null,
+      confirmAlert: null,
+      exceptionAlert: null,
     }
   }
 
   onChange = evt => {
     const key = evt.target.name;
     const val = evt.target.value;
-    this.setState(
-      {
-        [key]: val
-      }
+    this.setState({ [key]: val });
+  }
+
+  onTimeChange = evt => {
+    const key = evt.target.name;
+    const val = evt.target.value;
+    let newTime = moment().add(val, 'minutes').format("MM/DD/YYYY h:mm A")
+    this.setState({ [key]: newTime })
+    this.onMoneyChange(val)
+  }
+
+  onMoneyChange = test => {
+    let totalAm = test / 30
+    this.setState({ total: totalAm + ".00" })
+  }
+
+  onStartParkingClick = () => {
+    const showAlert = () => (
+      <SweetAlert
+        info
+        confirmBtnText="Cool Thanks!"
+        confirmBtnBsStyle="success"
+        title=""
+        onConfirm={() => this.pushToNewPage()}
+      >
+        <p>Meter Id: {this.state.meterNum}</p>
+        <p>Expiration: {this.state.time}</p>
+        <p>Total: ${this.state.total}</p>
+      </SweetAlert>
     );
-  };
+    this.setState({ alert: showAlert() })
+  }
+
+  goBack = () => {
+    const showAlert = () => (
+      <SweetAlert
+        info
+        showCancel
+        cancelBtnText="No"
+        confirmBtnText="Yes"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="primary"
+        title="Cancel Transaction?"
+        onConfirm={() => this.pushToOldPage()}
+        onCancel={() => this.setState({ alert: null })}
+      >
+      </SweetAlert>
+    );
+    this.setState({ alert: showAlert() })
+  }
+
+  hideAlert() {
+    this.setState({ alert: null, confirmAlert: null, exceptionAlert: null });
+  }
+
+  pushToNewPage = () => this.props.history.push({ pathname: "/ConfirmPage", data: this.state })
+
+  pushToOldPage = () => this.props.history.push("/Landing")
+
 
   render() {
     return (
       <React.Fragment>
+        {this.state.confirmAlert}
+        {this.state.alert}
+        {this.state.exceptionAlert}
         <div className="background">
           <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
             <div className="authentication-wrapper authentication-2 ui-bg-cover ui-bg-overlay-container container-fluid px-4">
@@ -43,14 +105,12 @@ class Extend extends Component {
                             <ExtendForm
                               meterNum={this.state.meterNum}
                               onChange={this.onChange}
-                              onClick={this.onStartParkingClick}
                             />
-                          
-                          <div className="form-group">
+                            <div className="form-group">
                               <label className="form-label">Time Length</label>
                               <br />
                               <select name="time" onChange={this.onTimeChange}>
-                                <option value="null">Add Additional...</option>
+                                <option value="null">Please select length</option>
                                 <option value="30">30 Mins</option>
                                 <option value="60">60 Mins</option>
                                 <option value="90">90 Mins</option>
@@ -61,16 +121,22 @@ class Extend extends Component {
                                 <option value="240">240 Mins</option>
                               </select>
                             </div>
-                            <img alt="Visa Checkout" className="v-button" role="button" src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png" />
                             <button
                               style={{ minWidth: "30vw", maxWidth: "100vw" }}
                               type="button"
                               className="btn btn-primary btn-block mt-4"
-                              onClick={this.onClick}
+                              onClick={this.onStartParkingClick}
                             >
-                              Extend Parking
-                        </button>
-                        </form>
+                              Extend
+                            </button>
+                            <button
+                              style={{ minWidth: "30vw", maxWidth: "100vw" }}
+                              type="button"
+                              className="btn btn-danger btn-sm"
+                              onClick={this.goBack}>
+                              Cancel
+                              </button>
+                          </form>
                           <div className="card-footer px-4 px-md-3 px-xs-3 px-sm-5" />
                         </div>
                       </div>
@@ -81,7 +147,7 @@ class Extend extends Component {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </React.Fragment >
     )
   }
 }

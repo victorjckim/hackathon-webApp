@@ -12,7 +12,7 @@ const ExtendForm = props => {
         placeholder=""
         onChange={props.onChange}
         isValid={props.meterNumValid}
-        //hintText="Please enter a valid meter number"
+      //hintText="Please enter a valid meter number"
       />
     </div>
   );
