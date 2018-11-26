@@ -9,41 +9,41 @@ import { Navbar, Nav } from 'react-bootstrap'
 
 
 class Navigation extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+  constructor(props) {
+    super(props)
+    this.state = {
 
-        }
     }
-    
-        render() {
-        return(
-            <React.Fragment>
-                   <Navbar>
-                       <Nav>
-                        <Link to="/">Landing</Link>
-                        </Nav>
-                        <Nav>
-                        <Link to="/Park">Park</Link>
-                        </Nav>
-                        <Nav>
-                        <Link to="/Register">Register</Link>
-                        </Nav>
-                        <Nav>
-                        <Link to="/Extend">Extend</Link>
-                        </Nav>
-                <Nav>
-                        <Link to="/Login">Login</Link>
-                        </Nav>
-                <Route exact path ="/" component={Landing}/>
-                <Route exact path ="/Park" component={Park}/>
-                <Route exact path ="/Register" component={Register}/>
-                <Route exact path ="/Login" component={Login}/>
-                <Route exact path ="/Extend" component={Extend}/>
-            </Navbar>
-            </React.Fragment>
-        )
-    }
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Navbar>
+          <Nav>
+            <Link to="/">Landing</Link>
+          </Nav>
+          <Nav>
+            <Link to="/Park">Park</Link>
+          </Nav>
+          <Nav>
+            <Link to="/Register">Register</Link>
+          </Nav>
+          <Nav>
+            <Link to="/Extend">Extend</Link>
+          </Nav>
+          <Nav>
+            <Link to="/Login">Login</Link>
+          </Nav>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/Park" component={Park} />
+          <Route exact path="/Register" component={Register} />
+          <Route exact path="/Login" component={Login} />
+          <Route exact path="/Extend" component={Extend} />
+        </Navbar>
+      </React.Fragment>
+    )
+  }
 }
 
 export default Navigation 

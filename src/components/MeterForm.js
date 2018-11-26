@@ -12,21 +12,10 @@ const MeterForm = props => {
         placeholder=""
         onChange={props.onChange}
         isValid={props.meterNumValid}
-        //hintText="Please enter a valid meter number"
+      //hintText="Please enter a valid meter number"
       />
-      <TextInput
-        label="Time"
-        name="time"
-        type="time"
-        value={props.time}
-        placeholder=""
-        onChange={props.onChange}
-        isValid={props.timeValid}
-        //hintText="Please enter a valid meter number"
-      />
-     
     </div>
   );
-};
+}
 
 export default MeterForm;
