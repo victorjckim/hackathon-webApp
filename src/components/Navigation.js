@@ -5,6 +5,7 @@ import Register from "../components/Register"
 import Login from "../components/Login"
 import Extend from "../components/Extend"
 import Landing from "../components/Landing"
+import Settings from "../components/Settings"
 import { Navbar, Nav } from 'react-bootstrap'
 
 
@@ -19,28 +20,29 @@ class Navigation extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar>
-          <Nav>
-            <Link to="/">Landing</Link>
-          </Nav>
-          <Nav>
-            <Link to="/Park">Park</Link>
-          </Nav>
-          <Nav>
-            <Link to="/Register">Register</Link>
-          </Nav>
-          <Nav>
-            <Link to="/Extend">Extend</Link>
-          </Nav>
-          <Nav>
-            <Link to="/Login">Login</Link>
-          </Nav>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/Park" component={Park} />
-          <Route exact path="/Register" component={Register} />
-          <Route exact path="/Login" component={Login} />
-          <Route exact path="/Extend" component={Extend} />
-        </Navbar>
+        {/* <Navbar>
+                       <Nav>
+                        <Link to="/">Landing</Link>
+                        </Nav>
+                        <Nav>
+                        <Link to="/Park">Park</Link>
+                        </Nav>
+                        <Nav>
+                        <Link to="/Register">Register</Link>
+                        </Nav>
+                        <Nav>
+                        <Link to="/Extend">Extend</Link>
+                        </Nav>
+                <Nav>
+                        <Link to="/Login">Login</Link>
+                        </Nav> */}
+        <Route exact path="/" component={Register} />
+        <Route exact path="/Park" component={Park} />
+        <Route exact path="/Landing" component={Landing} />
+        <Route exact path="/Login" component={Login} />
+        <Route exact path="/Extend" component={Extend} />
+        <Route exact path="/Settings" component={Settings} />
+        {/* </Navbar> */}
       </React.Fragment>
     )
   }
