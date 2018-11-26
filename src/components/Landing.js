@@ -1,52 +1,50 @@
 import React, { Component } from 'react';
 
 class Landing extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
+  constructor(props) {
+    super(props)
+    this.state = {
 
-        }
     }
+  }
 
-    onParkClick = evt => {
-        this.props.history.push("/Meter")
-    }
-    onExtendClick = evt => {
-        this.props.history.push("/Extend")
-    }
-    onSettingsClick = evt => {
-        this.props.history.push("/Meter")
-    }
+  onParkClick = evt => {
+    this.props.history.push("/Park")
+  }
+  onExtendClick = evt => {
+    this.props.history.push("/Extend")
+  }
+  onSettingsClick = evt => {
+    this.props.history.push("/Settings")
+  }
   render() {
     return (
-        <React.Fragment>
-            <div>
-        <button
-        style={{ minWidth: "30vw", maxWidth: "30vw", minHeight:"10vw", maxHeight: "10vw" }}
-        type="button"
-        className="btn btn-danger"
-        onClick={this.onParkClick}
-      >Park
-      </button>
-      </div>
-      <div>
-      <button
-        style={{ minWidth: "30vw", maxWidth: "30vw", minHeight:"10vw", maxHeight: "10vw" }}
-        type="button"
-        className="btn btn-primary"
-        onClick={this.onExtendClick}
-      >Extend
-      </button>
-      </div>
-      <div>
-      <button
-        style={{ minWidth: "30vw", maxWidth: "30vw", minHeight:"10vw", maxHeight: "10vw" }}
-        type="button"
-        className="btn btn-success"
-        onClick={this.onSettingsClick}
-      >Settings
-      </button>
-      </div>
+      <React.Fragment>
+        <div className="form-group">
+          <button
+            style={{ minWidth: "20vw", maxWidth: "20vw", minHeight: "10vw", maxHeight: "10vw" }}
+            type="button"
+            className="btn btn-primary"
+            onClick={this.onParkClick}
+          ><h3><i>Park</i></h3>
+          </button>
+          <hr />
+          <button
+            style={{ minWidth: "20vw", maxWidth: "20vw", minHeight: "10vw", maxHeight: "10vw" }}
+            type="button"
+            className="btn btn-primary"
+            onClick={this.onExtendClick}
+          ><h4><i>Extend Parking</i></h4>
+          </button>
+          <hr />
+          <button
+            style={{ minWidth: "20vw", maxWidth: "20vw", minHeight: "10vw", maxHeight: "10vw" }}
+            type="button"
+            className="btn btn-primary"
+            onClick={this.onSettingsClick}
+          ><h3><i>Settings</i></h3>
+          </button>
+        </div>
       </React.Fragment>
     );
   }
