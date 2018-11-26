@@ -28,7 +28,7 @@ const LoginForm = props => {
       <button
         style={{ minWidth: "30vw", maxWidth: "30vw" }}
         type="button"
-        className="btn btn-success btn-block mt-4"
+        className="btn btn-primary btn-block mt-4"
         onClick={props.onClick}
       >
         Sign In

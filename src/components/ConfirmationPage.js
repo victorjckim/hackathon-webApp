@@ -38,6 +38,23 @@ class Confirmation extends React.Component {
       window.V.on("payment.error", function (payment, error) { alert(JSON.stringify(error)); });
     }
   }
+  onClick = () => {
+    const showAlert = () => (
+      <SweetAlert
+        info
+        showCancel
+        cancelBtnText="Yes"
+        confirmBtnText="No"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="primary"
+        title="Confirm Transaction?"
+        onCancel={() => this.pushToOldPage()}
+        onConfirm={() => this.setState({ alert: null })}
+      >
+      </SweetAlert>
+    );
+    this.setState({ alert: showAlert() })
+  }
 
   goBack = () => {
     const showAlert = () => (
@@ -48,7 +65,7 @@ class Confirmation extends React.Component {
         confirmBtnText="Yes"
         confirmBtnBsStyle="danger"
         cancelBtnBsStyle="primary"
-        title="Cancel Transaction?"
+        title="Confirm Transaction?"
         onConfirm={() => this.pushToOldPage()}
         onCancel={() => this.setState({ alert: null })}
       >
@@ -89,7 +106,14 @@ class Confirmation extends React.Component {
                         <button
                           style={{ minWidth: "30vw", maxWidth: "100vw" }}
                           type="button"
-                          className="btn btn-danger btn-sm"
+                          className="btn btn-primary btn-block mt-4"
+                          onClick={this.onClick}>
+                          Confirm
+                        </button>
+                        <button
+                          style={{ minWidth: "30vw", maxWidth: "100vw" }}
+                          type="button"
+                          className="btn btn-default btn-block mt-4"
                           onClick={this.goBack}>
                           Cancel
                         </button>
