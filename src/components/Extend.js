@@ -5,7 +5,7 @@ class Extend extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      meterNum: "",
+      meterNum: "G611592",
       time: "",
       total: ""
     }
@@ -45,7 +45,32 @@ class Extend extends Component {
                               onChange={this.onChange}
                               onClick={this.onStartParkingClick}
                             />
-                          </form>
+                          
+                          <div className="form-group">
+                              <label className="form-label">Time Length</label>
+                              <br />
+                              <select name="time" onChange={this.onTimeChange}>
+                                <option value="null">Add Additional...</option>
+                                <option value="30">30 Mins</option>
+                                <option value="60">60 Mins</option>
+                                <option value="90">90 Mins</option>
+                                <option value="120">120 Mins</option>
+                                <option value="150">150 Mins</option>
+                                <option value="180">180 Mins</option>
+                                <option value="210">210 Mins</option>
+                                <option value="240">240 Mins</option>
+                              </select>
+                            </div>
+                            <img alt="Visa Checkout" className="v-button" role="button" src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png" />
+                            <button
+                              style={{ minWidth: "30vw", maxWidth: "100vw" }}
+                              type="button"
+                              className="btn btn-primary btn-block mt-4"
+                              onClick={this.onClick}
+                            >
+                              Extend Parking
+                        </button>
+                        </form>
                           <div className="card-footer px-4 px-md-3 px-xs-3 px-sm-5" />
                         </div>
                       </div>
