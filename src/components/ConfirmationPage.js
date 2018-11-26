@@ -38,6 +38,23 @@ class Confirmation extends React.Component {
       window.V.on("payment.error", function (payment, error) { alert(JSON.stringify(error)); });
     }
   }
+  onClick = () => {
+    const showAlert = () => (
+      <SweetAlert
+        info
+        showCancel
+        cancelBtnText="Yes"
+        confirmBtnText="No"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="primary"
+        title="Confirm Transaction?"
+        onCancel={() => this.pushToOldPage()}
+        onConfirm={() => this.setState({ alert: null })}
+      >
+      </SweetAlert>
+    );
+    this.setState({ alert: showAlert() })
+  }
 
   onClick = () => {
     const showAlert = () => (
@@ -66,7 +83,7 @@ class Confirmation extends React.Component {
         confirmBtnText="Yes"
         confirmBtnBsStyle="danger"
         cancelBtnBsStyle="primary"
-        title="Cancel Transaction?"
+        title="Confirm Transaction?"
         onConfirm={() => this.pushToOldPage()}
         onCancel={() => this.setState({ alert: null })}
       >
