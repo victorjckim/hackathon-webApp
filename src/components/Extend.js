@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import ExtendForm from "../components/ExtendForm"
-import SweetAlert from 'react-bootstrap-sweetalert';
+import React, { Component } from "react";
+import ExtendForm from "../components/ExtendForm";
+import SweetAlert from "react-bootstrap-sweetalert";
 const moment = require("moment");
 moment().format();
+window.alert = function() {};
 
 class Extend extends Component {
   constructor(props) {
@@ -13,28 +14,30 @@ class Extend extends Component {
       total: "",
       alert: null,
       confirmAlert: null,
-      exceptionAlert: null,
-    }
+      exceptionAlert: null
+    };
   }
 
   onChange = evt => {
     const key = evt.target.name;
     const val = evt.target.value;
     this.setState({ [key]: val });
-  }
+  };
 
   onTimeChange = evt => {
     const key = evt.target.name;
     const val = evt.target.value;
-    let newTime = moment().add(val, 'minutes').format("MM/DD/YYYY h:mm A")
-    this.setState({ [key]: newTime })
-    this.onMoneyChange(val)
-  }
+    let newTime = moment()
+      .add(val, "minutes")
+      .format("MM/DD/YYYY h:mm A");
+    this.setState({ [key]: newTime });
+    this.onMoneyChange(val);
+  };
 
   onMoneyChange = test => {
-    let totalAm = test / 30
-    this.setState({ total: totalAm + ".00" })
-  }
+    let totalAm = test / 30;
+    this.setState({ total: totalAm + ".00" });
+  };
 
   onStartParkingClick = () => {
     const showAlert = () => (
@@ -50,8 +53,8 @@ class Extend extends Component {
         <p>Total: ${this.state.total}</p>
       </SweetAlert>
     );
-    this.setState({ alert: showAlert() })
-  }
+    this.setState({ alert: showAlert() });
+  };
 
   goBack = () => {
     const showAlert = () => (
@@ -65,20 +68,19 @@ class Extend extends Component {
         title="Cancel Transaction?"
         onConfirm={() => this.pushToOldPage()}
         onCancel={() => this.setState({ alert: null })}
-      >
-      </SweetAlert>
+      />
     );
-    this.setState({ alert: showAlert() })
-  }
+    this.setState({ alert: showAlert() });
+  };
 
   hideAlert() {
     this.setState({ alert: null, confirmAlert: null, exceptionAlert: null });
   }
 
-  pushToNewPage = () => this.props.history.push({ pathname: "/ConfirmPage", data: this.state })
+  pushToNewPage = () =>
+    this.props.history.push({ pathname: "/ConfirmPage", data: this.state });
 
-  pushToOldPage = () => this.props.history.push("/Landing")
-
+  pushToOldPage = () => this.props.history.push("/Landing");
 
   render() {
     return (
@@ -87,12 +89,31 @@ class Extend extends Component {
         {this.state.alert}
         {this.state.exceptionAlert}
         <div className="background">
-          <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ height: "100vh" }}
+          >
             <div className="authentication-wrapper authentication-2 ui-bg-cover ui-bg-overlay-container container-fluid px-4">
               <div className="row">
-                <div className="authentication-inner py-5 mx-auto" >
-                  <div className="card" style={{ minWidth: "25vw", maxWidth: "70vw", minHeight: "60vh", maxHeight: "85vh" }}>
-                    <div className="d-flex justify-content-center align-items-center pb-2 mb-4" style={{ minWidth: "25vw", maxWidth: "70vw", minHeight: "60vh", maxHeight: "85vh" }}>
+                <div className="authentication-inner py-5 mx-auto">
+                  <div
+                    className="card"
+                    style={{
+                      minWidth: "25vw",
+                      maxWidth: "70vw",
+                      minHeight: "60vh",
+                      maxHeight: "85vh"
+                    }}
+                  >
+                    <div
+                      className="d-flex justify-content-center align-items-center pb-2 mb-4"
+                      style={{
+                        minWidth: "25vw",
+                        maxWidth: "70vw",
+                        minHeight: "60vh",
+                        maxHeight: "85vh"
+                      }}
+                    >
                       <div className="container">
                         <div className="card-body">
                           <div className="d-flex justify-content-center align-items-center pb-2 mb-4">
@@ -100,7 +121,7 @@ class Extend extends Component {
                           </div>
                           <h3 className="text-center text-muted font-weight-normal mb-4">
                             Extend
-                              </h3>
+                          </h3>
                           <form className="me">
                             <ExtendForm
                               meterNum={this.state.meterNum}
@@ -110,7 +131,9 @@ class Extend extends Component {
                               <label className="form-label">Time Length</label>
                               <br />
                               <select name="time" onChange={this.onTimeChange}>
-                                <option value="null">Please select length</option>
+                                <option value="null">
+                                  Please select length
+                                </option>
                                 <option value="30">30 Mins</option>
                                 <option value="60">60 Mins</option>
                                 <option value="90">90 Mins</option>
@@ -133,9 +156,10 @@ class Extend extends Component {
                               style={{ minWidth: "30vw", maxWidth: "100vw" }}
                               type="button"
                               className="btn btn-default btn-sm"
-                              onClick={this.goBack}>
+                              onClick={this.goBack}
+                            >
                               Cancel
-                              </button>
+                            </button>
                           </form>
                           <div className="card-footer px-4 px-md-3 px-xs-3 px-sm-5" />
                         </div>
@@ -147,10 +171,9 @@ class Extend extends Component {
             </div>
           </div>
         </div>
-      </React.Fragment >
-    )
+      </React.Fragment>
+    );
   }
 }
 
-export default Extend
-
+export default Extend;
